@@ -6,12 +6,15 @@ public class GuessGameImpl extends UnicastRemoteObject implements GuessGame {
     public int answer;
     private int min;
     private int max;
+    public int playerNumber = 0;
+
 
     public GuessGameImpl(int min, int max,int answer) throws RemoteException {
         super();
         this.min = min;
         this.max = max;
         this.answer = answer;
+        this.playerNumber = 0;
     }
 
     public boolean guess(int number) throws RemoteException {
@@ -31,5 +34,14 @@ public class GuessGameImpl extends UnicastRemoteObject implements GuessGame {
 
     public int getMax() throws RemoteException {
         return max;
+    }
+    public int getPlayerNumber() throws RemoteException 
+    {
+        return playerNumber;
+    }
+    public int setPlayerNumber() throws RemoteException
+    {
+        playerNumber++;
+        return playerNumber;
     }
 }

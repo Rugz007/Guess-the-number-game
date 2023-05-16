@@ -5,7 +5,12 @@ public class GuessGameClient {
     public static void main(String[] args) {
         try {
             GuessGame game = (GuessGame) Naming.lookup("//localhost/GuessGame");
-            int min = game.getMin();
+            int playerNumber = 0;
+            int temp = game.setPlayerNumber();
+            playerNumber = game.getPlayerNumber();
+
+            GuessGameServer.printPlayerJoined(playerNumber);
+            int min = game.getMin();    
             int max = game.getMax();
             Scanner scanner = new Scanner(System.in);
             while (true) {
@@ -14,9 +19,12 @@ public class GuessGameClient {
                 boolean correct = game.guess(guess);
                 if (correct) {
                     System.out.println("Congratulations, you guessed the number!");
+                    GuessGameServer.printPlayerWon(playerNumber);
                     break;
-                } else {
-                    System.out.printf("Sorry, that's not the number.HINT: The range is  %d to %d.%n", min, max);
+                } else {    
+                    min = game.getMin();
+                    max = game.getMax();
+                    System.out.printf("HINT: The range is  %d to %d", min, max);
                 }
             }
         } catch (Exception e) {

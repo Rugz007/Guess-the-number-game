@@ -3,6 +3,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 public class GuessGameServer {
+
     public static void main(String[] args) {
         try {
             LocateRegistry.createRegistry(1099);
@@ -21,5 +22,12 @@ public class GuessGameServer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public static void printPlayerWon(int playerNumber) {
+        System.out.printf("Player %d won!\n", playerNumber);
+    }
+    public static void printPlayerJoined(int playerNumber)
+    {
+        System.out.printf("Player %d joined!\n", playerNumber);
     }
 }
